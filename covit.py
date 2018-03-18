@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, redirect, session, g
 import sqlite3
 import sys
+import os.path
 app = Flask(__name__)
 app.secret_key = '#d\xe9X\x00\xbe~Uq\xebX\xae\x81\x1fs\t\xb4\x99\xa3\x87\xe6.\xd1_'
+database_name = ["userinfo.db"] # doign this so it is passed by reference
 # Python Processing
 def eprint(*s):
 	print(*s, file=sys.stderr)
@@ -11,6 +13,14 @@ def eprint(*s):
 @app.before_first_request
 def initial():
 	eprint("STARTUP")
+	database_name[0] = "userinfo.db"
+	if len(sys.argv) > 1:
+		database_name[0] = sys.argv[1];
+	if not os.path.isfile("data/%s" % database_name[0]):
+		eprint("Covit: Database not found in /data, creating new database at /data/%s" % database_name[0])
+		conn = sqlite3.connect("data/%s" % database_name[0])
+		cursor = conn.cursor()
+		cursor.execute(("CREATE TABLE user_info ( username TEXT, password TEXT, extras TEXT);"))
 	session.clear()
 	session['username'] = None;
 	session['tempusername'] = None;
@@ -20,7 +30,7 @@ def initial():
 # Managing Database
 @app.before_request
 def before_request():
-    g.db = sqlite3.connect("data/userinfo.db")
+	g.db = sqlite3.connect("data/%s" % database_name[0])
 
 @app.teardown_request
 def teardown_request(exception):
