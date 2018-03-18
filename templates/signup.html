@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Sign Up!</title>	
+		<link href='http://fonts.googleapis.com/css?family=Sintony:400,700' rel='stylesheet' type='text/css'/>
+		<link href='../static/css/stylesheet.css' rel='stylesheet' type='text/css'/>
+	</head>  
+	
+	<body>
+		<div id="banner">
+			<a href="/" class="hiddenlink">
+				<h1>Covit</h1>
+			</a>
+			<p class="lead">Easy, Secure exchange of Certified Princeton Everything</p>
+ 	 	</div>
+ 	 	<div class="box">
+ 	 		<form method="post" action="/signupHandler" align="right">
+ 	 			{% if True not in signupfailures %}
+ 	 				{% set pastUsername = "" %}
+ 	 				{% set pastExtras = "" %}
+ 	 			{% endif %}
+ 	 			{% if signupfailures[0] %}
+	 	 			<label for="usernameInput"> Username already taken, please choose another: </label>
+	 	 		{% else %}
+					<label for="usernameInput"> Username: </label>
+	 	 		{% endif %}
+	 	 		<input type="text" name="username" class="textbox" id="usernameInput" value={{ pastUsername }}><br>
+	 	 		{% if signupfailures[1] %}
+	 	 			<label for="passwordInput"> Password must be at least 8 characters: </label>
+	 	 		{% else %}
+	 	 			<label for="passwordInput"> Password: </label>
+	 	 		{% endif %}
+	 	 		<input type="password" name="password" class="textbox" id="passwordInput"> </input><br>
+	 	 		{% if signupfailures[2] %}
+	 	 			<label for="passwordInput2"> Passwords must match: </label>
+	 	 		{% else %}
+	 	 			<label for="passwordInput2"> Confirm Password: </label>
+	 	 		{% endif %}
+	 	 		<input type="password" name="password2" class="textbox" id="passwordInput2"> </input><br>
+	 	 		{% if signupfailures[3] %}
+	 	 			<label for="extrasInput"> Weird Extras: </label>
+	 	 		{% else %}
+	 	 			<label for="extrasInput"> Extras: </label>
+	 	 		{% endif %}
+	 	 			<input type="text" name="extras" class="textbox" id="extrasInput" value={{ pastExtras }}> </input><br>
+ 	 			<button type="submit" class="btn"> Sign up! </button>
+ 	 		</form>
+	 	</div>
+	</body>
+</html>

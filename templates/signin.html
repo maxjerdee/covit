@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Sign Up!</title>	
+		<link href='http://fonts.googleapis.com/css?family=Sintony:400,700' rel='stylesheet' type='text/css'/>
+		<link href='../static/css/stylesheet.css' rel='stylesheet' type='text/css'/>
+	</head>  
+	
+	<body>
+		<div id="banner">
+			<a href="/" class="hiddenlink">
+				<h1>Covit</h1>
+			</a>
+			<p class="lead">Easy, Secure exchange of Certified Princeton Everything</p>
+ 	 	</div>
+ 	 	<div class="box">
+ 	 		<form method="post" action="/signinHandler" align="right">
+				<label for="usernameInput"> Username: </label>
+	 	 		<input type="text" name="username" class="textbox" id="usernameInput" value={{ pastUsername }}><br>
+	 	 		<label for="passwordInput"> Password: </label>
+	 	 		<input type="password" name="password" class="textbox" id="passwordInput"> </input><br>
+	 	 		{% if failed %}
+	 	 			<p> Invalid Username/Password Combination </p>
+	 	 		{% endif %}
+ 	 			<button type="submit" class="btn"> Sign in </button>
+ 	 		</form>
+	 	</div>
+	</body>
+</html>
