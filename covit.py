@@ -11,7 +11,10 @@ def eprint(*s):
 @app.before_first_request
 def initial():
 	eprint("STARTUP")
+	session.clear()
 	session['username'] = None;
+	session['tempusername'] = None;
+	session['extras'] = None;
 	session['signupfailures'] = [False, False, False, False];
 
 # Managing Database
