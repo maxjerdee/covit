@@ -77,6 +77,7 @@ def signupHandler():
 def signin(failed=False):
 	return render_template('signin.html',failed=failed)
 
+# Check if password matches, if not, pass back entered username
 @app.route('/signinHandler', methods=['POST'])
 def signinHandler():
 	username = g.db.execute('SELECT * FROM user_info WHERE username = ?', [request.form['username']]).fetchall()
