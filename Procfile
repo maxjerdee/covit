@@ -1,1 +1,1 @@
-web: python covit.py
+web: python covit.py -p $PORT
