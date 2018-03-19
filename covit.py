@@ -18,7 +18,7 @@ def initial():
 	if len(sys.argv) > 1:
 		database_name[0] = sys.argv[1];
 	if not os.path.isfile("data/%s" % database_name[0]):
-		eprint("Covit: Database not found in /data, creating new database at /data/%s" % database_name[0])
+		eprint("Database not found in /data, creating new database at /data/%s" % database_name[0])
 		conn = sqlite3.connect("data/%s" % database_name[0])
 		cursor = conn.cursor()
 		cursor.execute(("CREATE TABLE user_info ( username TEXT, password TEXT, extras TEXT);"))
@@ -59,6 +59,8 @@ def signup():
 # Check that all of the fields were properly filled out, return to the page otherwise (with progress saved)
 @app.route('/signupHandler', methods=['POST'])
 def signupHandler():
+	if 'signupfailures' not in session: 
+		session['signupfailures'] = [False, False, False, False]
 	session['tempusername'] = request.form['username']
 	session['password'] = request.form['password']
 	session['extras'] = request.form['extras']
