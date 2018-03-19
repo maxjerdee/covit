@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, redirect, session, g
 import sqlite3
 import sys
-import os.path
+import os
+
 app = Flask(__name__)
 app.secret_key = '#d\xe9X\x00\xbe~Uq\xebX\xae\x81\x1fs\t\xb4\x99\xa3\x87\xe6.\xd1_'
 database_name = ["userinfo.db"] # doign this so it is passed by reference
@@ -108,4 +109,8 @@ def debug():
 
 # Running
 if __name__ == "__main__":
-    app.run(port=33333)
+	port = 33333;
+	# Reading Heroku's given port number
+	if 'PORT' in os.environ:
+		port = int(os.environ['PORT'])
+	app.run(port=port)
