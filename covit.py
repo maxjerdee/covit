@@ -22,11 +22,8 @@ def initial():
 		conn = sqlite3.connect("data/%s" % database_name[0])
 		cursor = conn.cursor()
 		cursor.execute(("CREATE TABLE user_info ( username TEXT, password TEXT, extras TEXT);"))
-	session.clear()
-	session['username'] = None;
-	session['tempusername'] = None;
-	session['extras'] = None;
-	session['signupfailures'] = [False, False, False, False];
+	# For acting like new user every time server is rebooted
+	session.clear();
 
 # Managing Database
 @app.before_request
@@ -42,12 +39,21 @@ def teardown_request(exception):
 @app.route('/')
 def homepage():
 	users = g.db.execute("SELECT username FROM user_info").fetchall()
-	eprint(session['username'], users);
+	if 'username' in session:
+		eprint(session['username'], users);
+	else:
+		eprint("New User")
+		session['username'] = None;
 	return render_template('homepage.html', username=session['username'])
 
 @app.route('/signup')
 def signup():
-	eprint(session['signupfailures'])
+	if 'signupfailures' in session:
+		eprint(session['signupfailures'])
+	else:
+		session['tempusername'] = None;
+		session['extras'] = None;
+		session['signupfailures'] = [False, False, False, False];
 	return render_template('signup.html',signupfailures=session['signupfailures'],pastUsername=session['tempusername'],pastExtras=session['extras'])
 
 # Check that all of the fields were properly filled out, return to the page otherwise (with progress saved)
