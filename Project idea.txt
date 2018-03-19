@@ -1,0 +1,45 @@
+Project idea
+
+1. Tinder -- but for orphans!
+2. Craigslist for Princeton
+    - Users have ratings based on reliability, returning items, etc
+        - Who should be able to see ratings? How do we generate those ratings?
+        - Allow users to appeal?
+    - Auto deduct and return deposit
+        - How to protect against abuse
+        - Need to have option to appeal
+        - When should we remove deposit?
+            - Could users cancel credit cards to avoid deposit being taken?
+            - Paypal solution?
+    - Traditional payment or free or exchange
+    - CAS Login
+    - Different sections / forums for different services?
+    - Products or services? Limitation on acceptable postings?
+        - Report post / user / seller option
+        - Automatically search for certain phrases and forward to us for review
+        - Ban or ding ratings of spam posters
+    - What kind of accountability could we offer for users?
+        - Allow users to request transaction history in case of theft?
+    - Security concerns
+        - If processing credit card info, need high security
+        - Third party payment application or first-party? Security tradeoffs of each
+        - Protect transaction histories of users (from other users and from ourselves)
+    - Search functionality
+        - Tags vs user-created descriptions vs categories
+    - Database:
+        - username
+        - name
+        - birthday (no kids under 13)
+        - rating
+        - if no paypal, credit card info
+    - flexible rental period
+        - renter indicates they've gotten it
+        - owner indicates they've gotten it returned
+    - meet ups?
+        - chat? email?
+        - send location to meet up?
+        - maps?
+    - email notifications
+    - In textbook category, auto-pull 1st image from Google images to show cover of a textbook with any given name
+        - small button underneath picture to report incorrect image
+        - asks seller if it looks the same

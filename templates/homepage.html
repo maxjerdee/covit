@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Covit</title>	
+		<link href='http://fonts.googleapis.com/css?family=Sintony:400,700' rel='stylesheet' type='text/css'/>
+		<link href='../static/css/stylesheet.css' rel='stylesheet' type='text/css'/>
+	</head>  
+
+	<body>
+		<div id="banner">
+			<a href="/" class="hiddenlink">
+				<h1>Covit</h1>
+			</a>
+			<p class="lead">Easy, Secure exchange of Certified Princeton Everything</p>
+ 	 	</div>
+ 	 	<div class="box">
+ 	 		{% if username == None %}
+	 	 		<form method="get" action="/signup">
+	 	 			<button class="btn"> Create an account! </button>
+	 	 		</form>
+	 	 		<form method="get" action="/signin">
+	 	 			<button class="btn"> Sign in </button>
+	 	 		</form>
+ 	 		{% else %}
+ 	 			<p> Welcome, {{ username }}! </p>
+	 	 		<form method="post" action="/signout">
+	 	 			<button class="btn"> Sign out </button>
+	 	 		</form>
+ 	 		{% endif %}
+ 	 		<form method="get" action="/post">
+ 	 			<button class="btn"> Post listing </button>
+ 	 		</form>
+ 	 		<form method="get" action="/debug">
+ 	 			<button class="btn"> Debug! </button>
+ 	 		</form>
+	 	</div>
+ 	 	<div id="listings">
+ 	 		<p> Listings: </p>
+ 	 		<div class="listing">
+ 	 			Listing 1
+ 	 		</div>
+ 	 		<div class="listing">
+ 	 			Listing 2
+ 	 		</div>
+ 	 		<div class="listing">
+ 	 			Listing 3
+ 	 		</div>
+ 	 		<div class="listing">
+ 	 			Listing 4
+ 	 		</div>
+ 	 		<div class="listing">
+ 	 			Listing 5
+ 	 		</div>
+ 	 		<div class="listing">
+ 	 			Listing 6
+ 	 		</div>
+ 	 		<div class="listing">
+ 	 			Listing 7
+ 	 		</div>
+ 	 		<div class="listing">
+ 	 			Listing 8
+ 	 		</div>
+ 	 		<div class="listing">
+ 	 			Listing 9
+ 	 		</div>
+ 	 		<div class="listing">
+ 	 			Listing 10
+ 	 		</div>
+ 	 	</div>
+	</body>
+</html>
