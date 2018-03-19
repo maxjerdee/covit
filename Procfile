@@ -1,1 +1,1 @@
-web: gunicorn covit:covit
+web: gunicorn covit:app
