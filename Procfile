@@ -1,1 +1,1 @@
-web: python covit.py -p $PORT
+web: gunicorn app:app
