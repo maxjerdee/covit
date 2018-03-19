@@ -84,13 +84,15 @@ def signupHandler():
 
 @app.route('/signin')
 def signin(failed=False):
-	return render_template('signin.html',failed=failed)
+	if not failed:
+		session['tempusername'] = "";
+	return render_template('signin.html',username=session['tempusername'])
 
 # Check if password matches, if not, pass back entered username
 @app.route('/signinHandler', methods=['POST'])
 def signinHandler():
 	username = g.db.execute('SELECT * FROM user_info WHERE username = ?', [request.form['username']]).fetchall()
-	
+	session['tempusername'] = request.form['username'];
 	if len(username) == 0:
 		return signin(failed=True);
 	elif len(username) > 1:
