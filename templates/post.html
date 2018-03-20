@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Make a Listing</title>	
+		<link href='http://fonts.googleapis.com/css?family=Sintony:400,700' rel='stylesheet' type='text/css'/>
+		<link href='../static/css/stylesheet.css' rel='stylesheet' type='text/css'/>
+	</head>  
+	
+	<body>
+		<div id="banner">
+			<a href="/" class="hiddenlink">
+				<h1>Covit</h1>
+			</a>
+			<p class="lead">Easy, Secure exchange of Certified Princeton Everything</p>
+ 	 	</div>
+ 	 	<div class="box">
+ 	 		<form method="post" action="/postHandler" align="right">
+				<label for="itemnameInput"> Item Name: </label>
+	 	 		<input type="text" name="itemname" class="textbox" id="itemnameInput"><br>
+	 	 		<label for="itemDescInput"> Item Description: </label>
+	 	 		<input type="text" name="itemdescription" class="textbox" id="itemDescInput"> </input><br>
+	 	 		<label for="priceInput"> Price: </label>
+	 	 		<input type="text" name="price" class="textbox" id="priceInput"> </input><br>
+	 	 		{% if failed %}
+	 	 			<p> Invalid Price </p>
+	 	 		{% endif %}
+ 	 			<button type="submit" class="btn"> Submit! </button>
+ 	 		</form>
+	 	</div>
+	</body>
+</html>

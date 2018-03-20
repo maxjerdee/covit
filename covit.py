@@ -16,22 +16,28 @@ def initial():
 	session['tempusername'] = None;
 	session['extras'] = None;
 	session['signupfailures'] = [False, False, False, False];
+	session['listingfailures'] = [False, False, False]
 
 # Managing Database
 @app.before_request
 def before_request():
     g.db = sqlite3.connect("data/userinfo.db")
+    g.dblist = sqlite3.connect("data/postinfo.db")
+
 
 @app.teardown_request
 def teardown_request(exception):
     if hasattr(g, 'db'):
         g.db.close()
+        g.dblist.close()
 
 # Routing
 @app.route('/')
 def homepage():
 	users = g.db.execute("SELECT username FROM user_info").fetchall()
+	posts = g.dblist.execute("SELECT itemname FROM post_info").fetchall()
 	eprint(session['username'], users);
+	eprint(posts);
 	return render_template('homepage.html', username=session['username'])
 
 @app.route('/signup')
@@ -61,6 +67,27 @@ def signupHandler():
 		session['username'] = request.form['username']
 		g.db.execute("INSERT INTO user_info VALUES (?,?,?)", [session['username'], session['password'], session['extras']]);
 		g.db.commit()
+		return redirect('/')
+
+
+
+@app.route('/post')
+def listing():
+	return render_template('post.html')
+
+	# Check that all of the fields were properly filled out, return to the page otherwise (with progress saved)
+@app.route('/postHandler', methods=['POST'])
+def listingHandler():
+	itemname = request.form['itemname']
+	itemdescription = request.form['itemdescription']
+	price = request.form['price']
+
+	if not price.isdigit():
+		return redirect('/post')
+	else:
+		# Sucessful Listing Creation
+		g.dblist.execute("INSERT INTO post_info VALUES (?,?, ?)", [itemname, itemdescription, price]);
+		g.dblist.commit()
 		return redirect('/')
 
 @app.route('/signin')
